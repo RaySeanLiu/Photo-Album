@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 interface Photo {
   id: number;
   beforeUrl: string;
@@ -6,16 +8,21 @@ interface Photo {
 }
 
 const PhotoGallery = () => {
+  const [activePhoto, setActivePhoto] = useState<number | null>(null);
+
+  // Get the base URL for proper path resolution
+  const baseUrl = import.meta.env.BASE_URL;
+
   // Photos with before and after images
   const photos: Photo[] = [
     {
       id: 1,
-      beforeUrl: '/cat-before.png',
-      afterUrl: '/cat-after.png',
+      beforeUrl: `${baseUrl}cat-before.png`,
+      afterUrl: `${baseUrl}cat-after.png`,
       aspectRatio: 'square'
     },
     // Placeholder images for demonstration
-    { id: 2, beforeUrl: '/cave-before.png', afterUrl: '/cave-after.JPG', aspectRatio: 'portrait' },
+    { id: 2, beforeUrl: `${baseUrl}cave-before.png`, afterUrl: `${baseUrl}cave-after.JPG`, aspectRatio: 'portrait' },
     { id: 3, beforeUrl: 'https://picsum.photos/350/350?3', afterUrl: 'https://picsum.photos/350/350?4', aspectRatio: 'square' },
     { id: 4, beforeUrl: 'https://picsum.photos/400/280?5', afterUrl: 'https://picsum.photos/400/280?6', aspectRatio: 'landscape' },
     { id: 5, beforeUrl: 'https://picsum.photos/320/450?7', afterUrl: 'https://picsum.photos/320/450?8', aspectRatio: 'portrait' },
@@ -46,46 +53,48 @@ const PhotoGallery = () => {
           gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 250px), 1fr))',
         }}
       >
-        {photos.map((photo) => (
-          <div
-            key={photo.id}
-            className={`
-              relative overflow-hidden
-              ${getAspectRatioClass(photo.aspectRatio)}
-              rounded-sm
-              transition-all duration-300 ease-out
-              hover:-translate-y-2
-              active:-translate-y-2
-              group
-              cursor-pointer
-              touch-manipulation
-            `}
-          >
-            {/* Before image (grayscale) */}
-            <img
-              src={photo.beforeUrl}
-              alt={`Photo ${photo.id} - before`}
-              className="
-                absolute inset-0 w-full h-full object-cover
-                transition-opacity duration-500 ease-out
-                group-hover:opacity-0
-                group-active:opacity-0
-              "
-            />
-            {/* After image (color) */}
-            <img
-              src={photo.afterUrl}
-              alt={`Photo ${photo.id} - after`}
-              className="
-                absolute inset-0 w-full h-full object-cover
-                opacity-0
-                transition-opacity duration-500 ease-out
-                group-hover:opacity-100
-                group-active:opacity-100
-              "
-            />
-          </div>
-        ))}
+        {photos.map((photo) => {
+          const isActive = activePhoto === photo.id;
+
+          return (
+            <div
+              key={photo.id}
+              onClick={() => setActivePhoto(isActive ? null : photo.id)}
+              onMouseEnter={() => setActivePhoto(photo.id)}
+              onMouseLeave={() => setActivePhoto(null)}
+              className={`
+                relative overflow-hidden
+                ${getAspectRatioClass(photo.aspectRatio)}
+                rounded-sm
+                transition-all duration-300 ease-out
+                ${isActive ? '-translate-y-2' : ''}
+                cursor-pointer
+                touch-manipulation
+              `}
+            >
+              {/* Before image (grayscale) */}
+              <img
+                src={photo.beforeUrl}
+                alt={`Photo ${photo.id} - before`}
+                className={`
+                  absolute inset-0 w-full h-full object-cover
+                  transition-opacity duration-500 ease-out
+                  ${isActive ? 'opacity-0' : 'opacity-100'}
+                `}
+              />
+              {/* After image (color) */}
+              <img
+                src={photo.afterUrl}
+                alt={`Photo ${photo.id} - after`}
+                className={`
+                  absolute inset-0 w-full h-full object-cover
+                  transition-opacity duration-500 ease-out
+                  ${isActive ? 'opacity-100' : 'opacity-0'}
+                `}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
