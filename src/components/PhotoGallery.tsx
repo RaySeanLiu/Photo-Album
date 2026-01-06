@@ -12,7 +12,7 @@ const PhotoGallery = () => {
 
   const baseUrl = import.meta.env.BASE_URL;
   
-  const backgroundImageUrl = `${baseUrl}background_party.jpg`;
+  const backgroundImageUrl = `${baseUrl}new_background.jpg`;
 
   const photos: Photo[] = [
     {
