@@ -25,7 +25,7 @@ const PhotoGallery = () => {
     { id: 2, beforeUrl: `${baseUrl}cave-before.png`, afterUrl: `${baseUrl}cave-after.JPG`, aspectRatio: 'portrait' },
     { id: 3, beforeUrl: `${baseUrl}beach.png`, afterUrl: `${baseUrl}beach_photo_in_cancun.webp`, aspectRatio: 'square' },
     { id: 4, beforeUrl: `${baseUrl}restaurant_in_cancun.png`, afterUrl: `${baseUrl}restaurant_in_cancun.webp`, aspectRatio: 'landscape' },
-    { id: 5, beforeUrl: `${baseUrl}hat_icon.png`, afterUrl: `${baseUrl}beach_pic.webp`, aspectRatio: 'portrait' },
+    { id: 5, beforeUrl: `${baseUrl}hat_icon.png`, afterUrl: `${baseUrl}beach_pic.webp`, aspectRatio: 'landscape' },
     { id: 6, beforeUrl: 'https://picsum.photos/380/300?9', afterUrl: 'https://picsum.photos/380/300?10', aspectRatio: 'landscape' },
     { id: 7, beforeUrl: 'https://picsum.photos/300/420?11', afterUrl: 'https://picsum.photos/300/420?12', aspectRatio: 'portrait' },
     { id: 8, beforeUrl: 'https://picsum.photos/360/360?13', afterUrl: 'https://picsum.photos/360/360?14', aspectRatio: 'square' },
