@@ -12,9 +12,6 @@ const PhotoGallery = () => {
 
   const baseUrl = import.meta.env.BASE_URL;
 
-  // ✅ Your actual background image
-  const backgroundImageUrl = `${baseUrl}new_background.jpg`;
-
   const photos: Photo[] = [
     {
       id: 1,
@@ -46,14 +43,8 @@ const PhotoGallery = () => {
   };
 
   return (
-    /* 🌍 FULL-PAGE BACKGROUND */
-    <div
-      className="min-h-screen w-full bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: `url(${backgroundImageUrl})`,
-      }}
-    >
-      {/* CONTENT */}
+
+    <div className="w-full">
       <div className="w-full px-4 py-8 sm:px-8 sm:py-12 md:px-12 md:py-16 lg:px-16 lg:py-16">
         <div
           className="grid gap-6 sm:gap-10 md:gap-12 lg:gap-16"
