@@ -23,7 +23,7 @@ const PhotoGallery = () => {
     },
     // Placeholder images for demonstration
     { id: 2, beforeUrl: `${baseUrl}cave-before.png`, afterUrl: `${baseUrl}cave-after.JPG`, aspectRatio: 'portrait' },
-    { id: 3, beforeUrl: `${baseUrl}public/pexels-asadphoto-457882.jpg`, afterUrl: 'https://picsum.photos/400/280?6', aspectRatio: 'square' },
+    { id: 3, beforeUrl: `${baseUrl}public/pexels-asadphoto-457882.jpg`, afterUrl: `${baseUrl}public/beach_photo_in_cancun.webp`, aspectRatio: 'square' },
     { id: 4, beforeUrl: `${baseUrl}public/restaurant.htm`, afterUrl: `${baseUrl}public/restaurant_in_cancun.webp`, aspectRatio: 'landscape' },
     { id: 5, beforeUrl: 'https://picsum.photos/320/450?7', afterUrl: 'https://picsum.photos/320/450?8', aspectRatio: 'portrait' },
     { id: 6, beforeUrl: 'https://picsum.photos/380/300?9', afterUrl: 'https://picsum.photos/380/300?10', aspectRatio: 'landscape' },
