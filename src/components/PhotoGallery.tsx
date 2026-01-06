@@ -11,7 +11,8 @@ const PhotoGallery = () => {
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
 
   const baseUrl = import.meta.env.BASE_URL;
-  
+
+  // ✅ Your actual background image
   const backgroundImageUrl = `${baseUrl}new_background.jpg`;
 
   const photos: Photo[] = [
@@ -45,63 +46,61 @@ const PhotoGallery = () => {
   };
 
   return (
-    /* 🌍 FULL-PAGE BACKGROUND WRAPPER */
+    /* 🌍 FULL-PAGE BACKGROUND */
     <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat"
+      className="min-h-screen w-full bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `url(${backgroundImageUrl})`,
       }}
     >
-      {/* Optional dark overlay for readability */}
-      <div className="min-h-screen bg-white/80 backdrop-blur-sm">
-        <div className="w-full px-4 py-8 sm:px-8 sm:py-12 md:px-12 md:py-16 lg:px-16 lg:py-16">
-          <div
-            className="grid gap-6 sm:gap-10 md:gap-12 lg:gap-16"
-            style={{
-              gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 250px), 1fr))',
-            }}
-          >
-            {photos.map((photo) => {
-              const isActive = activePhoto === photo.id;
+      {/* CONTENT */}
+      <div className="w-full px-4 py-8 sm:px-8 sm:py-12 md:px-12 md:py-16 lg:px-16 lg:py-16">
+        <div
+          className="grid gap-6 sm:gap-10 md:gap-12 lg:gap-16"
+          style={{
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 250px), 1fr))',
+          }}
+        >
+          {photos.map((photo) => {
+            const isActive = activePhoto === photo.id;
 
-              return (
-                <div
-                  key={photo.id}
-                  onClick={() => setActivePhoto(isActive ? null : photo.id)}
-                  onMouseEnter={() => setActivePhoto(photo.id)}
-                  onMouseLeave={() => setActivePhoto(null)}
+            return (
+              <div
+                key={photo.id}
+                onClick={() => setActivePhoto(isActive ? null : photo.id)}
+                onMouseEnter={() => setActivePhoto(photo.id)}
+                onMouseLeave={() => setActivePhoto(null)}
+                className={`
+                  relative overflow-hidden
+                  ${getAspectRatioClass(photo.aspectRatio)}
+                  rounded-sm
+                  transition-all duration-300 ease-out
+                  ${isActive ? '-translate-y-2' : ''}
+                  cursor-pointer
+                  touch-manipulation
+                `}
+              >
+                <img
+                  src={photo.beforeUrl}
+                  alt={`Photo ${photo.id} - before`}
                   className={`
-                    relative overflow-hidden
-                    ${getAspectRatioClass(photo.aspectRatio)}
-                    rounded-sm
-                    transition-all duration-300 ease-out
-                    ${isActive ? '-translate-y-2' : ''}
-                    cursor-pointer
-                    touch-manipulation
+                    absolute inset-0 w-full h-full object-cover
+                    transition-opacity duration-500 ease-out
+                    ${isActive ? 'opacity-0' : 'opacity-100'}
                   `}
-                >
-                  <img
-                    src={photo.beforeUrl}
-                    alt={`Photo ${photo.id} - before`}
-                    className={`
-                      absolute inset-0 w-full h-full object-cover
-                      transition-opacity duration-500 ease-out
-                      ${isActive ? 'opacity-0' : 'opacity-100'}
-                    `}
-                  />
-                  <img
-                    src={photo.afterUrl}
-                    alt={`Photo ${photo.id} - after`}
-                    className={`
-                      absolute inset-0 w-full h-full object-cover
-                      transition-opacity duration-500 ease-out
-                      ${isActive ? 'opacity-100' : 'opacity-0'}
-                    `}
-                  />
-                </div>
-              );
-            })}
-          </div>
+                />
+                <img
+                  src={photo.afterUrl}
+                  alt={`Photo ${photo.id} - after`}
+                  className={`
+                    absolute inset-0 w-full h-full object-cover
+                    transition-opacity duration-500 ease-out
+                    ${isActive ? 'opacity-100' : 'opacity-0'}
+                  `}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
