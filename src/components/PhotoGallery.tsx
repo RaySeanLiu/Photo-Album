@@ -11,8 +11,7 @@ const PhotoGallery = () => {
   const [activePhoto, setActivePhoto] = useState<number | null>(null);
 
   const baseUrl = import.meta.env.BASE_URL;
-
-  // 🔹 PLACEHOLDER background image
+  
   const backgroundImageUrl = `${baseUrl}background_party.jpg`;
 
   const photos: Photo[] = [
